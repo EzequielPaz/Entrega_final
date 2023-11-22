@@ -1,0 +1,11 @@
+{% extends "Peliculas/index.html" %}
+{% load static %}
+{% block cuerpo %}
+<h1>Borrar Pelicula</h1>
+
+<form action="" method="POST">
+    {% csrf_token %}
+    Estas seguro que deseas borrar la pelicula {{Pelicula.titulo}}??
+    <input type="submit" value="Eliminar">
+</form>
+{% endblock cuerpo  %}

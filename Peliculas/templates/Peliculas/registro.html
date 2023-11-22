@@ -1,0 +1,10 @@
+{% extends "Peliculas/index.html" %}
+{% load static %}
+{% block cuerpo %}
+<h1>Registrar usuario</h1>
+<form action="" method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Registrate!</button>
+</form>
+{% endblock cuerpo  %}

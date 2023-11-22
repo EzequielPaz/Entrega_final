@@ -1,0 +1,25 @@
+{% extends 'Peliculas/index.html'%}
+{% load static %}
+
+{% block titulo%}Peliculas{% endblock titulo%}
+
+
+
+{% block cuerpo%}
+
+    <h1 class="text-bg-info">Publique su pelicula favorita!</h1>
+    <h1 class="text-center">Complete los datos</h1>
+    <div class="container mt-2">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <form action="" method="post">
+                    {% csrf_token %}
+                    <table>
+                        {{miFormulario.as_table}}
+                    </table>
+                    <input type="submit" value="Enviar">
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock cuerpo%}

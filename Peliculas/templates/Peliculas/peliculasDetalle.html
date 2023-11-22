@@ -1,0 +1,12 @@
+{% extends "Peliculas/index.html" %}
+{% load static %}
+{% block cuerpo %}
+<h1>Detalles de la pelicula</h1>
+
+<p>Nombre de la pelicula: <i>{{Pelicula.titulo}}</i></p>
+
+
+<p>
+    <a href="{% url 'peliculasLIsta' %}">Regresar</a>
+</p>
+{% endblock cuerpo  %}
