@@ -3,7 +3,7 @@
 {% block cuerpo %}
 <h1>Listado de peliculas</h1>
 
-<a href={% url 'PeliculaCrearNuevo' %}>Nuevo Curso</a>
+<a href={% url 'PeliculaCrearNuevo' %}>Nueva Pelicula</a>
 <form action="" method="GET">
     {% csrf_token %}
     {{formulario.as_p}}
