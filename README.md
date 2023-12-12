@@ -5,7 +5,7 @@ Año: 2023
 
 Descripción del Proyecto: 
 
-Pagina web que le permite a los usuarios sus peliculas favoritas 
+Pagina web que le permite a los usuarios publicar sus peliculas favoritas 
 
 Ejecucion:
 
