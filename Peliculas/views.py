@@ -31,7 +31,7 @@ def pelicula(self):
     documentoDeTexto = f"----->Pelicula {Pelicula.titulo} Genero {Pelicula.genero}" 
     return HttpResponse(documentoDeTexto)
 
-@login_required
+
 def peliculasForm(request):
     if request.method == 'POST':
         miFormulario = PeliculaForm(request.POST) 
@@ -109,4 +109,4 @@ class PeliculaBorrar(DeleteView):
     template_name = 'Peliculas/peliculasBorrar.html'  
     success_url = reverse_lazy('pelicula_lista')
 
-    
+

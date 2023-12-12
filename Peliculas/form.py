@@ -1,6 +1,7 @@
 from django import forms
+from .models import Pelicula
 
-class PeliculaForm(forms.Form):
-    titulo = forms.CharField()
-    director = forms.CharField()
-    genero = forms.CharField()
+class PeliculaForm(forms.ModelForm):
+    class Meta:
+        model = Pelicula
+        fields = ["titulo", "director", "genero"]

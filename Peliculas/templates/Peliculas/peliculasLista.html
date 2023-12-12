@@ -2,7 +2,7 @@
 {% load static %}
 
 
-{% block content %}
+{% block cuerpo %}
   <h2>Listado de Películas</h2>
   
   {% if peliculas %}
@@ -21,4 +21,4 @@
   {% endif %}
   
   <p><a href="{% url 'pelicula_crear' %}">Añadir nueva película</a></p>
-{% endblock %}
+{% endblock cuerpo %}
