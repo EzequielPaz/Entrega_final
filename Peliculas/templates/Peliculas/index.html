@@ -19,7 +19,7 @@
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ms-auto">
-                        <li class="nav-item"><a class="nav-link" href="{% url 'peliculaForm'%}">Pelicula del mes</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'peliculasForm'%}">Pelicula del mes</a></li>
                         <li class="nav-item"><a class="nav-link" href="{% url 'registro' %}">Registrarse</a></li>
                         <li class="nav-item"><a class="nav-link" href="{% url 'login' %}">Iniciar sesión</a></li>
                         <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}">Cerrar sesión</a></li>
@@ -38,7 +38,7 @@
                 <h1 class="fw-bolder">Venta de peliculas</h1>
                 <p class="lead">Aqui podra publicar sus peliculas y elegir sus favoritas</p>
                 
-                <a class="btn btn-lg btn-light" href="{% url 'PeliculaLista' %}">Lista de peliculas</a>
+                <a class="btn btn-lg btn-light" href="{% url 'pelicula_lista' %}">Lista de peliculas</a>
                 
             </div>
         </header>

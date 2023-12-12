@@ -1,29 +1,24 @@
 {% extends "Peliculas/index.html" %}
 {% load static %}
-{% block cuerpo %}
-<h1>Listado de peliculas</h1>
 
-<a href={% url 'PeliculaCrearNuevo' %}>Nueva Pelicula</a>
-<form action="" method="GET">
-    {% csrf_token %}
-    {{formulario.as_p}}
-    <input type="submit" value="Buscar">
-</form>
-{% if peliculas %}
-{% for pelicula in peliculas %}
-<li>Nombre: {{Pelicula.titulo}}
-    <p>
-        <a href="{% url 'PeliculasDetalle' Pelicula.pk %}">Ver</a>
-        |
-        <a href="{% url 'PeliculasActualizar' Pelicula.pk %}">Editar</a>
-        |
-        <a href="{% url 'PeliculasBorrar' Pelicula.pk %}">Borrar</a>
-        
-    </p>
-</li>
 
-{% endfor %}
-{% else %}
-<p>No se encontraron resultados.</p>
-{% endif %}
-{% endblock cuerpo  %}
+{% block content %}
+  <h2>Listado de Películas</h2>
+  
+  {% if peliculas %}
+    <ul>
+      {% for pelicula in peliculas %}
+        <li>
+          <a href="{% url 'pelicula_detalle' pelicula.pk %}">{{ pelicula.titulo }}</a>
+          - {{ pelicula.director }} - {{ pelicula.genero }}
+          (<a href="{% url 'pelicula_actualizar' pelicula.pk %}">Editar</a> |
+          <a href="{% url 'pelicula_borrar' pelicula.pk %}">Eliminar</a>)
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>No hay películas disponibles.</p>
+  {% endif %}
+  
+  <p><a href="{% url 'pelicula_crear' %}">Añadir nueva película</a></p>
+{% endblock %}

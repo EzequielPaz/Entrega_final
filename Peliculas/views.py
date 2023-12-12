@@ -8,6 +8,7 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login, authenticate
 
 from django.contrib.auth.views import LogoutView
+from django.contrib.auth.decorators import login_required
 
 #clases basadas en vistas
 from django.views.generic.detail import DetailView
@@ -25,15 +26,17 @@ def inicio(request):
     return render(request, "Peliculas/index.html")
 
 def pelicula(self):
-    pelicula = Pelicula(titulo="Python", director="55555")
+    pelicula = Pelicula(titulo="", director="")
     pelicula.save()
-    documentoDeTexto = f"----->Curso {Pelicula.titulo} Camada {Pelicula.genero}" 
+    documentoDeTexto = f"----->Pelicula {Pelicula.titulo} Genero {Pelicula.genero}" 
     return HttpResponse(documentoDeTexto)
 
-def peliculaForm(request):
+@login_required
+def peliculasForm(request):
     if request.method == 'POST':
         miFormulario = PeliculaForm(request.POST) 
         if miFormulario.is_valid():
+            
             miFormulario.save()
             return render(request, 'Peliculas/index.html')
     else:
@@ -79,29 +82,31 @@ def login_view(request):
 
 #Vista basada en clases  
 
-#Read 
-class PeliculaLista(ListView): 
+class PeliculaLista(ListView):
     model = Pelicula
-    template_name = "Peliculas/peliculasLista.html"
+    template_name = 'Peliculas/peliculasLista.html'
+    context_object_name = 'peliculas'
 
-#Detail 
-class PeliculaDetalle(DetailView): 
+class PeliculaDetalle(DetailView):
     model = Pelicula
-    template_name = "Peliculas/peliculasDetalle.html"
+    template_name = 'Peliculas/peliculasDetalle.html'  
+    context_object_name = 'pelicula'
+
+class PeliculaCrear(CreateView):
+    model = Pelicula
+    template_name = 'Peliculas/peliculasCrear.html'  
+    fields = ['titulo', 'director', 'genero']
+    success_url = reverse_lazy('pelicula_lista')
+
+class PeliculaActualizar(UpdateView):
+    model = Pelicula
+    template_name = 'Peliculas/peliculasActualizar.html'  
+    fields = ['titulo', 'director', 'genero']
+    success_url = reverse_lazy('pelicula_lista')
+
+class PeliculaBorrar(DeleteView):
+    model = Pelicula
+    template_name = 'Peliculas/peliculasBorrar.html'  
+    success_url = reverse_lazy('pelicula_lista')
+
     
-#Create
-class PeliculaCrear(CreateView): 
-    model = Pelicula
-    fields = ["titulo", "director", "genero"]
-    success_url = reverse_lazy('PeliculasLista')
-
-#Update
-class PeliculaActualizar(UpdateView): 
-    model = Pelicula
-    fields = ["titulo", "director", "genero"]
-    success_url = reverse_lazy('PeliculasLista')
-
-#Delete
-class PeliculaBorrar(DeleteView): 
-    model = Pelicula 
-    success_url = reverse_lazy('PeliculasLista')
