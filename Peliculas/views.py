@@ -110,3 +110,5 @@ class PeliculaBorrar(DeleteView):
     success_url = reverse_lazy('pelicula_lista')
 
 
+def about(request):
+    return render(request, 'Peliculas/about.html')
