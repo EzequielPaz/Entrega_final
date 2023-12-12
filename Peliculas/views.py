@@ -1,6 +1,6 @@
 from django.http import HttpResponse
-from django.shortcuts import render
-from .form import PeliculaForm
+from django.shortcuts import redirect, render
+from .form import PeliculaForm, FormularioEdicion, FormularioCambioPassword
 from .models import Pelicula
 #importo esto para la vista de registro
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
@@ -20,7 +20,12 @@ from django.urls import reverse_lazy
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin #bloqueo de clases
 
+from django.contrib.auth.models import User
 
+from django.contrib.auth.forms import PasswordChangeForm
+from django.contrib.auth.views import PasswordChangeView
+
+from django.utils.decorators import method_decorator
 
 def inicio(request):
     return render(request, "Peliculas/index.html")
@@ -112,3 +117,31 @@ class PeliculaBorrar(DeleteView):
 
 def about(request):
     return render(request, 'Peliculas/about.html')
+
+@method_decorator(login_required, name='dispatch')
+
+class UsuarioEdicionView(UpdateView):
+    model = User
+    form_class = FormularioEdicion
+    template_name = 'Peliculas/editar_usuario.html'
+    success_url = reverse_lazy('inicio')
+
+    def get_object(self, queryset=None):
+        return self.request.user
+    
+class CambioPasswordView(LoginRequiredMixin, PasswordChangeView):
+    form_class = FormularioCambioPassword
+    template_name = 'Peliculas/passwordCambio.html'  
+    success_url = reverse_lazy('password_exitoso')  
+
+    def form_valid(self, form):
+        
+        return super().form_valid(form)
+
+    def form_invalid(self, form):
+        
+        return super().form_invalid(form)
+    
+@login_required
+def ver_perfil(request):
+    return render(request, 'Peliculas/perfil.html')
